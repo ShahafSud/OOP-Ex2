@@ -1,20 +1,26 @@
 from User import User
+
 class SocialNetwork:
-    __numNetworks = 0
-    __instance = None
+    __initialized = False
+
     def __init__(self, name):
-        if SocialNetwork.__numNetworks>=1:
-            return SocialNetwork.__instance
-        self.__name=name
-        print("The social network " + name + "was created!")
-        self.__users = {}
-        SocialNetwork.__numNetworks += 1
+        if not SocialNetwork.__initialized:
+            self.__name = name
+            self.__users = {}
+            SocialNetwork.__initialized = True
+            print("The social network " + name + " was created!")
 
     def sign_up(self, UN, PW):
-        if len(PW)>8 or len(PW)<4:
-            return
-        try:
-            a = self.__users[UN]
-            return
-        except Exception as e:
-            self.__users[UN] = User(UN, PW)
+        if len(PW) > 8 or len(PW) < 4 or UN in self.__users:
+            return None
+        self.__users[UN] = User(UN, PW)
+        return self.__users[UN]
+    def log_in(self, UN, PW):
+        self.__users[UN].login(PW)
+    def log_out(self, UN):
+        self.__users[UN].logout()
+    def __str__(self):
+        ans = self.__name + "social network:\n"
+        for user in self.__users.values():
+            ans = ans + str(user) + "\n"
+        return ans
