@@ -10,13 +10,13 @@ class SalePost(Post):
         print(self)
 
     def sold(self, password):
-        if (not self._owner.validat_pass(password)):
+        if (not self._owner.validate_pass(password)):
             return
         self.__issold = True
         print(self._owner.UN+"'s product is sold")
 
-    def discount (self, precent, password):
-        self._owner.validat_pass(password)
+    def discount(self, precent, password):
+        self._owner.validate_pass(password)
         if (precent >= 100):
             self.__price = 0
         self.__price -= (precent*self.__price)/100
