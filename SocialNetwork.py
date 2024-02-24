@@ -16,15 +16,15 @@ class SocialNetwork:
             SocialNetwork.__instance = self
         else:
             self.__dict__ = SocialNetwork.__instance.__dict__
-            print("Only one SocialNetwork Object is allowed!") #SingleTone
+            raise SingletonException("Only one SocialNetwork Object is allowed!")
 
     def sign_up(self, UN, PW):
         if UN in self.__users:
             # make sure only one user with the same name exist a all time.
-            print("UserName already exist in " + self.__name + " Existing user has been returned!")
+            raise InvalidInputException("UserName already exist in " + self.__name + " Existing user has been returned!")
             return self.__users[UN]
         if len(PW) > 8 or len(PW) < 4:
-            print("Password must be of 4 to 8 characters! No user was signed up!")
+            raise InvalidInputException("Password must be of 4 to 8 characters! No user was signed up!")
         self.__users[UN] = User(UN, PW)
         return self.__users[UN]
     def log_in(self, UN, PW):
@@ -36,3 +36,7 @@ class SocialNetwork:
         for user in self.__users.values():
             ans = ans + str(user) + "\n"
         return ans
+class SingletonException(Exception):
+    pass
+class InvalidInputException(Exception):
+    pass
