@@ -1,4 +1,6 @@
 from SocialNetwork import SocialNetwork
+
+
 def main():
     # Creating the network
     network = SocialNetwork("Twitter")
@@ -93,7 +95,7 @@ def main():
     print()
 
     # Network printing
-    print(network)
+    print(network, end='')
 
 
 if __name__ == '__main__':
