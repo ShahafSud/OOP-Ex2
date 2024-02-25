@@ -68,4 +68,4 @@ class User:
         for follower in self.__followers.values():
             follower.__notifications.append(self.UN + " has a new post")
     def __str__(self):
-        return f"User name: {self.UN}, Number of posts: {len(self.__posts)},Number of followers: {len(self.__followers)}"
+        return f"User name: {self.UN}, Number of posts: {len(self.__posts)}, Number of followers: {len(self.__followers)}"
